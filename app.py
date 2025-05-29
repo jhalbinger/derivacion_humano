@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import requests
 import os
+import sys  # Para imprimir errores en stderr y que Render los muestre
 
 app = Flask(__name__)
 
@@ -27,7 +28,7 @@ def derivar_humano():
 
     # 💬 Armar mensaje para enviar a Marina
     mensaje = (
-        f"📩 Usuario whatsapp:{numero_cliente} pidió hablar con un humano.\n"
+        f"📩 Usuario {numero_cliente} pidió hablar con un humano.\n"
         f"📝 Motivo: {motivo}"
     )
 
@@ -46,16 +47,17 @@ def derivar_humano():
         if response.status_code == 201:
             return jsonify({"estado": "Mensaje enviado a Marina correctamente ✅"})
         else:
+            # Si falla el envío, mostramos detalle de Twilio
+            print("❌ Error Twilio:", response.text, file=sys.stderr)
             return jsonify({
                 "error": "No se pudo enviar el mensaje a Marina.",
                 "detalle": response.text
             }), 500
 
     except Exception as e:
-        print("❌ Error interno:", e)
+        print("❌ Error interno:", e, file=sys.stderr)
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
