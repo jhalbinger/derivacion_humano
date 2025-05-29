@@ -10,8 +10,8 @@ TWILIO_SID = "ACd7f136c6cf64a754606ef982d884bac7"
 TWILIO_AUTH_TOKEN = "79f8320640a3cbb915bcc79c358336a8"
 TWILIO_NUMBER = "whatsapp:+14155238886"  # Número de origen asignado por Twilio
 
-# 📱 Número de Marina (el único verificado en Twilio Trial)
-NUMERO_MARINA = "whatsapp:+5491124591988"
+# 📱 Número de Jona (el único verificado en Twilio Trial)
+NUMERO_JONA = "whatsapp:+5491124591988"
 
 @app.route("/")
 def index():
@@ -38,17 +38,17 @@ def derivar_humano():
             auth=(TWILIO_SID, TWILIO_AUTH_TOKEN),
             data={
                 "From": TWILIO_NUMBER,
-                "To": NUMERO_MARINA,
+                "To": NUMERO_JONA,
                 "Body": mensaje
             }
         )
 
         if response.status_code == 201:
-            return jsonify({"estado": "Mensaje enviado a Marina correctamente ✅"})
+            return jsonify({"estado": "Mensaje enviado a Jona correctamente ✅"})
         else:
             print("❌ Error Twilio:", response.text, file=sys.stderr)
             return jsonify({
-                "error": "No se pudo enviar el mensaje a Marina.",
+                "error": "No se pudo enviar el mensaje a Jona.",
                 "detalle": response.text
             }), 500
 
