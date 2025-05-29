@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # 🔐 Credenciales de Twilio (reales para cuenta Trial)
 TWILIO_SID = "ACd7f136c6cf64a754606ef982d884bac7"
-TWILIO_AUTH_TOKEN = "79f8320640a3cbb915bcc79c358336a8"
+TWILIO_AUTH_TOKEN = "5a6119ffcc8a3fbfcb3e7bd0a3fbfbfb"
 TWILIO_NUMBER = "whatsapp:+14155238886"  # Número de origen asignado por Twilio
 
 # 📱 Número de Jona (el único verificado en Twilio Trial)
