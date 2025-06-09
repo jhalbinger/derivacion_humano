@@ -21,15 +21,15 @@ def index():
 def derivar_humano():
     datos = request.get_json()
     numero_cliente = datos.get("numero", "").strip()
-    motivo = datos.get("motivo", "").strip()
+    consulta = datos.get("consulta", "").strip()
 
-    if not numero_cliente or not motivo:
-        return jsonify({"error": "Falta el número o el motivo"}), 400
+    if not numero_cliente or not consulta:
+        return jsonify({"error": "Falta el número o la consulta"}), 400
 
     # 💬 Armar mensaje para enviar a Marina
     mensaje = (
         f"📩 Usuario {numero_cliente} pidió hablar con un humano.\n"
-        f"📝 Motivo: {motivo}"
+        f"📝 Consulta: {consulta}"
     )
 
     try:
@@ -59,4 +59,3 @@ def derivar_humano():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
